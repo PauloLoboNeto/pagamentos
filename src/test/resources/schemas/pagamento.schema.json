@@ -1,0 +1,43 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "pedido",
+        "status",
+        "menssagem"
+    ],
+    "properties": {
+        "pedido": {
+            "type": "string",
+            "default": "",
+            "title": "The pedido Schema",
+            "examples": [
+                "a27bdf14-9864-48a1-91b4-0815c8d0a899"
+            ]
+        },
+        "status": {
+            "type": "string",
+            "default": "",
+            "title": "The status Schema",
+            "examples": [
+                "APROVADO"
+            ]
+        },
+        "menssagem": {
+            "type": "string",
+            "default": "",
+            "title": "The menssagem Schema",
+            "examples": [
+                "Pagamento aprovado"
+            ]
+        }
+    },
+    "examples": [{
+        "pedido": "a27bdf14-9864-48a1-91b4-0815c8d0a899",
+        "status": "APROVADO",
+        "menssagem": "Pagamento aprovado"
+    }]
+}

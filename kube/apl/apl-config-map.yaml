@@ -1,0 +1,13 @@
+# Create a configmap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apl-pagamentos-config
+  labels:
+    app: apl-pagamentos
+data:
+  DATASOURCE_INITIALIZE: 'true'
+  HIBERNATE_DDL_AUTO: update
+  PEDIDO_URL: http://localhost:9091/tech-challenge/pedidos
+  MONGO_URI: mongodb+srv://usertemp:xM9HCOM8vhRPSW93@fiap-cluster.2quggum.mongodb.net/?retryWrites=true&w=majority
+  MONGO_DATABASE: fiap_pagamento
