@@ -4,7 +4,7 @@ apiVersion: v1
 metadata:
   name: apl-pagamentos
   annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::813173347981:role/eks-eks-nodes"
+    eks.amazonaws.com/role-arn: "arn:aws:iam::231670762225:role/eks-eks-nodes"
 spec:
   selector:
     app: apl-pagamentos

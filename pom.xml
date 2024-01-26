@@ -19,6 +19,7 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-cloud.version>2021.0.8</spring-cloud.version>
+		<sonar.coverage.exclusions>**/FilaPagamentosApplication.java,src/test/**</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
 
@@ -180,6 +181,19 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.7</version> <!-- Atualize para a versão mais recente -->
+				<configuration>
+					<excludes>
+						<exclude>**/test/java/**/*</exclude>
+						<exclude>**/FilaPagamentosApplication.java</exclude>
+					</excludes>
+					<rules>
+						<rule>
+							<element>BUNDLE</element>
+							<value>COVEREDRATIO</value>
+							<minimum>80%</minimum>
+						</rule>
+					</rules>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
