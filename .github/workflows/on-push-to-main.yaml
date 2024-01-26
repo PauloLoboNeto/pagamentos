@@ -1,0 +1,32 @@
+name: SonarCloud Analysis
+
+on:
+  push:
+    branches:
+      - main # Ou a branch padrão do seu repositório
+
+jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+          java-package: 'jdk'
+          architecture: 'x64'
+
+      - name: Executar testes
+        run: mvn clean install -Pcoverage
+
+      - name: Gerar report
+        run: mvn jacoco:report
+
+      - name: Enviar report para o sonar
+        run: mvn sonar:sonar -Dsonar.organization=pauloloboneto -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=${{secrets.SONARCLOUD_TOKEN}} -Dsonar.projectKey=PauloLoboNeto_pagamentos -Dsonar.projectName=pagamentos -Dsonar.java.coveragePlugin=jacoco -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml

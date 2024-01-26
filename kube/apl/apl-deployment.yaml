@@ -47,5 +47,10 @@ spec:
                   key: MONGO_DATABASE
             - name: server.port
               value: '9090'
+            - name: server.servlet.context-path
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-pedidos-config
+                  key: SERVLET_CONTEXT_PATH
           ports:
             - containerPort: 9090
