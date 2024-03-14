@@ -11,4 +11,6 @@ data:
   PEDIDO_URL: http://acd652e434c7140808cb5801d25eea90-928075136.us-east-1.elb.amazonaws.com:9091/tech-challenge/pedidos
   MONGO_URI: mongodb+srv://usertemp:xM9HCOM8vhRPSW93@fiap-cluster.2quggum.mongodb.net/?retryWrites=true&w=majority
   MONGO_DATABASE: fiap_pagamento
+  QUEUE_NOTIFICA_CLIENTE: notifica_cliente
+  QUEUE_ATUALIZA_PEDIDO: atualiza_pedido
   SERVLET_CONTEXT_PATH: /tech-challenge/pagamento

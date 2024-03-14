@@ -1,9 +1,11 @@
 package fiappagamentos.facade;
 
+import fiappagamentos.interfaces.gateways.IAtualizaPedidoQueuePort;
+import fiappagamentos.interfaces.gateways.INotificaClienteQueuePort;
 import fiappagamentos.interfaces.gateways.IPagamentoRepositoryPort;
-import fiappagamentos.interfaces.gateways.IPedidoHttpPort;
+import fiappagamentos.interfaces.usecases.IAtualizaPedidoUseCasePort;
+import fiappagamentos.interfaces.usecases.INotificaClienteUseCasePort;
 import fiappagamentos.interfaces.usecases.IPagamentoUseCasePort;
-import fiappagamentos.interfaces.usecases.IPedidoUseCasePort;
 import fiappagamentos.usecases.*;
 
 import org.springframework.context.annotation.Bean;
@@ -18,8 +20,13 @@ public class ConfigurationContext {
     }
 
     @Bean
-    public IPedidoUseCasePort pedidoUseCasePort(IPedidoHttpPort pedidoHttpPort) {
-        return new PedidoUseCaseImpl(pedidoHttpPort);
+    public INotificaClienteUseCasePort notificaClienteUseCase(INotificaClienteQueuePort notificaClienteQueuePort) {
+        return new NotificaClienteUseCaseImpl(notificaClienteQueuePort);
+    }
+
+    @Bean
+    public IAtualizaPedidoUseCasePort atualizaPedidoUseCase(IAtualizaPedidoQueuePort atualizaPedidoQueuePort) {
+        return new AtualizaPedidoUseCaseImpl(atualizaPedidoQueuePort);
     }
 
 }
