@@ -31,24 +31,22 @@ services:
     build: ./
     env_file: ./.env
     ports:
-      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+      - 9090:9090
     environment:
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:postgresql://postgres:$POSTGRES_DOCKER_PORT/$POSTGRES_DATABASE",
-        "spring.datasource.username" : "$POSTGRES_ROOT_USER",
-        "spring.datasource.password" : "$POSTGRES_ROOT_PASSWORD",
-        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
-        "spring.jpa.hibernate.show-sql" : true,
         "spring.datasource.initialization-mode" : "always",
         "spring.datasource.initialize" : true,
-        "spring.datasource.continue-on-error": true,
         "spring.jpa.hibernate.ddl-auto":"update",
-        "server.port" : "$SPRING_LOCAL_PORT",
+        "server.port" : "9090",
+      
         "pedido.service.url" : "http://localhost:9091/tech-challenge/pedidos",
+        "spring.data.mongodb.uri" : "mongodb+srv://usertemp:xM9HCOM8vhRPSW93@fiap-cluster.2quggum.mongodb.net/?retryWrites=true&w=majority",
+        "spring.data.mongodb.database" : "fiap_pagamento",
         "queue.atualiza.pedido" : "StatusChange",
         "queue.notifica.cliente" : "ClientNotify",
-        
+        "server.servlet.context-path" : "/tech-challenge/pagamento"        
       }'
+
     volumes:
       - .m2:/root/.m2
       - .aws:/root/.aws
