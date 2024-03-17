@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: apl-pagamentos
-          image: plobon/fiappagamentos:v1
+          image: plobon/fiappagamentos:v2
           imagePullPolicy: "Always"
           env:
             - name: spring.datasource.initialize
@@ -30,11 +30,6 @@ spec:
                 configMapKeyRef:
                   name: apl-pagamentos-config
                   key: HIBERNATE_DDL_AUTO
-            - name: pedido.service.url
-              valueFrom:
-                configMapKeyRef:
-                  name: apl-pagamentos-config
-                  key: PEDIDO_URL
             - name: spring.data.mongodb.uri
               valueFrom:
                 configMapKeyRef:
@@ -52,5 +47,15 @@ spec:
                 configMapKeyRef:
                   name: apl-pedidos-config
                   key: SERVLET_CONTEXT_PATH
+            - name: queue.notifica.cliente
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-pagamentos-config
+                  key: QUEUE_NOTIFICA_CLIENTE
+            - name: queue.atualiza.pedido
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-pagamentos-config
+                  key: QUEUE_ATUALIZA_PEDIDO
           ports:
             - containerPort: 9090

@@ -1,24 +1,18 @@
 package fiappagamentos.facade;
 
-import fiappagamentos.gateways.PagamentoRepositoryAdapter;
+import fiappagamentos.interfaces.gateways.IAtualizaPedidoQueuePort;
+import fiappagamentos.interfaces.gateways.INotificaClienteQueuePort;
 import fiappagamentos.interfaces.gateways.IPagamentoRepositoryPort;
-import fiappagamentos.interfaces.gateways.IPedidoHttpPort;
 import fiappagamentos.interfaces.usecases.IPagamentoUseCasePort;
-import fiappagamentos.interfaces.usecases.IPedidoUseCasePort;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static fiappagamentos.util.PagamentoHelper.gerarPagamento;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 class ConfigurationContextTest {
 
@@ -27,7 +21,9 @@ class ConfigurationContextTest {
     @Mock
     private IPagamentoRepositoryPort pagamentoRepositoryPort;
     @Mock
-    private IPedidoHttpPort pedidoHttpPort;
+    private INotificaClienteQueuePort notificaClienteQueuePort;
+    @Mock
+    private IAtualizaPedidoQueuePort atualizaPedidoQueuePort;
 
     AutoCloseable mock;
 
@@ -47,10 +43,17 @@ class ConfigurationContextTest {
         assertThat(pagamentoUseCase).isNotNull();
         assertThat(pagamentoUseCase).isInstanceOf(IPagamentoUseCasePort.class);
     }
-    @Test
-    void deveConfigurarPedidoUseCase() {
-        var pedidoUseCase = config.pedidoUseCasePort(pedidoHttpPort);
-        assertThat(pedidoUseCase).isNotNull();
-        assertThat(pedidoUseCase).isInstanceOf(IPedidoUseCasePort.class);
-    }
+//    @Test
+//    void deveConfigurarNoficaClienteUseCase() {
+//        var notificaClienteUseCase = config.notificaClienteUseCase(notificaClienteQueuePort);
+//        assertThat(notificaClienteUseCase).isNotNull();
+//        assertThat(notificaClienteUseCase).isInstanceOf(INotificaClienteQueuePort.class);
+//    }
+//    @Test
+//    void deveConfigurarAtualizaPedidoUseCase() {
+//        var atualizaPedioUseCase = config.atualizaPedidoUseCase(atualizaPedidoQueuePort);
+//        assertThat(atualizaPedioUseCase).isNotNull();
+//        assertThat(atualizaPedioUseCase).isInstanceOf(IAtualizaPedidoQueuePort.class);
+//    }
+
 }
