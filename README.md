@@ -1,56 +1,52 @@
 <br />
 <div align="center">
 
-  <h3 align="center">fiappagamentos</h3>
+<h3 align="center">Microsserviço de Pedidos</h3>
 
   <p align="center">
-    Application created for the challenge 1 in software architeture graduation.
+    Aplicação criada para o projeto de Pós-Graduação em Arquitetura de software pela FIAP.
     <br />
     <br />
-    <a href="https://github.com/santos-gabriel/fiappagamentos/issues">Report Bug</a>
+    <a href="https://github.com/PauloLoboNeto/fiappedidos/issues">Report Bug</a>
     ·
-    <a href="https://github.com/santos-gabriel/fiappagamentos/issues">Request Feature</a>
+    <a href="https://github.com/PauloLoboNeto/fiappedidos/issues">Request Feature</a>
   </p>
 </div>
 
 
 <details>
-  <summary>Table of Contents</summary>
+  <summary>Tabela de conteúdos</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#Sobre o projeto">Sobre o projeto</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#Construído com">Construído com</a></li>
       </ul>
     </li>
     <li>
-      <a href="#local-execution">Local Execution</a>
+      <a>Como executar local</a>
       <ul>
-        <li><a href="#setup">Set up</a></li>
-        <li><a href="#run-locally">Run locally</a></li>
+        <li><a href="#Configurar e rodar localmente">Configurar e rodar localmente</a></li>
       </ul>
     </li>
   </ol>
 </details>
 
 
-## About The Project
+## Sobre o projeto
 
-This application was created by:
-- Rafael Hans Sandalo, rm350051, rafael.hans@gmail.com
+- Utilizando Arquitetura Hexagonal, conceitos de DDD(https://miro.com/app/board/uXjVMC27TvQ=/?share_link_id=505879927156).
+
+
+
+Esta aplicação foi criada por:
 - Gabriel Almeida dos Santos, rm430120, gabrielalmeidads@gmail.com
-- Silvia Mara Rodrigues Florido, rm349730, sflorido@gmail.com
-- Paulo Lobo Neto, rm430057, pauloloboneto@gmail.com 
-- Matheus Patusco Bascur,  rm350519, m.patusco13@gmail.com 
+- Paulo Lobo Neto, rm430057, pauloloboneto@gmail.com
 
-Using Hexagonal architecture concepts and DDD concepts, where can get access in this link
-https://miro.com/app/board/uXjVMC27TvQ=/?share_link_id=505879927156
+<p align="right">(<a href="#readme-top">ir para o topo</a>)</p>
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-### Built With
+### Construído com
 
 <div align="center"> 
 
@@ -66,38 +62,65 @@ https://miro.com/app/board/uXjVMC27TvQ=/?share_link_id=505879927156
 
 <div align="center"> 
 
-[![postgres][postgres]][postgres-url]
+[![AWS][AWS]][AWS-url]
+
+</div> 
+
+<div align="center"> 
+
+[![MONGO][MONGO]][MONGO-url]
+
+</div> 
+
+<div align="center"> 
+
+[![INSOMNIA][INSOMNIA]][INSOMNIA-url]
 
 </div> 
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">ir para o topo</a>)</p>
 
 
-### Set up
+### Configurar e rodar localmente
 
-To run this application locally, follow these steps:
+Para roda essa aplicação, siga os seguintes steps:
 
-1. Add this information in the archive .env:
-  - POSTGRES_ROOT_USER=postgres
-  - POSTGRES_ROOT_PASSWORD=postgres
-  - POSTGRES_DATABASE=postgres
-  - POSTGRES_LOCAL_PORT=5432
-  - POSTGRES_DOCKER_PORT=5432
-  - SPRING_LOCAL_PORT=9090
-  - SPRING_DOCKER_PORT=9090
-  - PGADMIN_ROOT_EMAIL=admin@domain.com
-  - PGADMIN_ROOT_PASSWORD=admin
+1. Instale o [docker](https://docs.docker.com/desktop/?_gl=1*f60bmt*_ga*MTEzMjc4Nzg0NS4xNjkwNjc0MTM0*_ga_XJWPQMJYHQ*MTcxMDY1MjA5MC4xMS4xLjE3MTA2NTIwOTEuNTkuMC4w)
+2. Na pasta .aws, altere as credenciais: aws_access_key_id e aws_secret_access_key para as suas credenciais da AWS.
+1. Caso você não tenha a fila criada na AWS, o próprio run do projeto irá criá-la automaticamente;
+2. Caso queria criar a fila, pode criar duas filas padrões: uma com o nome de StatusChange e outra com o nome de Fila1;
+3. Esse step é importante, pois automaticamente quando o container subir, ele irá criar uma fila SQS na sua conta de
+   forma automática. Se atente aos custos!
+4. As credenciais que você utilizar, precisam ter a permissão de leitura e escrita da fila;
+   Caso a fila não exista na sua conta, a credencial precisa ter permissão de criação da fila.
+3. Na raíz do projeto, execute o comando: docker compose up
+4. Instale o [insomnia](INSOMNIA)
+5. Use a collection(insomnia-pagamentos.json) do insomnia que está localizada na raíz desse repositório.
+   Ao utilizar a collection, se atente para utilizar o environment "local".
+6. O mongoDB está disponibilizado para a aplicação utilizando a plataforma "MongoDB Atlas".
+   1. Caso deseje configurar para apontar pra um mongo configurado por você dentro da plataforma atlas, 
+   siga essa documentação para criar o banco no atlas: https://www.mongodb.com/pt-br/docs/atlas/;
+   2. Dentro do arquivo .env na raíz do projeto, altere as variáveis do mongo de acordo com o que você criou.
 
+### Desenho da arquitetura
+![img_2.png](img_2.png)
 
-### Run locally
+### Padrão SAGA utilizado
 
-1. Execute the docker compose
-2. And can use this postman collection to make requests:
-  https://documenter.getpostman.com/view/14258182/2s93zGzyQk
+Coreogradado:
+- Utilizamos o padrão coreografado para promover uma arquitetura mais descentralizada,
+  onde cada serviço tem autonomia para gerenciar seu próprio fluxo de transações,
+  reduzindo a dependência de um componente centralizado.
+- Os serviços se comunicam diretamente entre si para coordenar as transações,
+  sem depender de um componente central. Isso reduz o acoplamento entre
+  os serviços e pode facilitar a evolução independente de cada serviço ao longo do tempo.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Interação entre pagamento e pedido:
+![img.png](img.png)
 
+Interação entre pedido e fila de pedidos:
+![img_1.png](img_1.png)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -107,6 +130,11 @@ To run this application locally, follow these steps:
 [Docker]: https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white
 [Docker-url]: https://www.docker.com/
 
-[postgres]: https://img.shields.io/badge/postgress-00000F?style=for-the-badge&logo=postgress&logoColor=white
-[postgres-url]: https://www.postgresql.org/docs/
+[AWS]: https://img.shields.io/badge/AWS-ffa500?style=for-the-badge&logo=AWS&logoColor=orange
+[AWS-url]: https://docs.aws.amazon.com/?nc2=h_ql_doc_do&refid=2ee11bb2-bc40-4546-9852-2c4ad8e8f646
 
+[MONGO]: https://img.shields.io/badge/MONGO-008000?style=for-the-badge&logo=MONGO&logoColor=green
+[MONGO-url]: https://www.mongodb.com
+
+[INSOMNIA]: https://img.shields.io/badge/INSOMNIA-993399?style=for-the-badge&logo=H2&logoColor=purple
+[INSOMNIA-url]: https://insomnia.rest/download
