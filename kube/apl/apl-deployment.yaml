@@ -30,6 +30,11 @@ spec:
                 configMapKeyRef:
                   name: apl-pagamentos-config
                   key: HIBERNATE_DDL_AUTO
+            - name: pedido.service.url
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-pagamentos-config
+                  key: PEDIDO_URL
             - name: spring.data.mongodb.uri
               valueFrom:
                 configMapKeyRef:

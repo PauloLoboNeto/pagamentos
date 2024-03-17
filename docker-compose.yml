@@ -44,7 +44,7 @@ services:
         "spring.datasource.continue-on-error": true,
         "spring.jpa.hibernate.ddl-auto":"update",
         "server.port" : "$SPRING_LOCAL_PORT",
-        
+        "pedido.service.url" : "http://localhost:9091/tech-challenge/pedidos",
         "queue.atualiza.pedido" : "StatusChange",
         "queue.notifica.cliente" : "ClientNotify",
         
